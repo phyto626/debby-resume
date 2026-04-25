@@ -1,0 +1,47 @@
+{
+  "sub": "橫跨數位、實體、內容與數據的全方位行銷執行力",
+  "items": [
+    {
+      "icon": "✍",
+      "name": "文案力 × 內容策略",
+      "desc": "以故事塑造品牌溫度，從官網銷售頁到 FB 社群貼文，讓文字直接轉換業績。",
+      "tags": "FB/IG 貼文,官網文案,型錄企劃",
+      "featured": true
+    },
+    {
+      "icon": "📊",
+      "name": "數位廣告投放",
+      "desc": "Google Ads、FB 廣告操作，ROAS 達 200+。結合 GA4 數據優化廣告素材與出價策略。",
+      "tags": "Google Ads,GA4,GSC",
+      "featured": false
+    },
+    {
+      "icon": "🌐",
+      "name": "官網 SEO 優化",
+      "desc": "「TRX 單槓」關鍵字排名第一，點擊率提升 30%、加購率提升 80%，免費流量降廣告成本。",
+      "tags": "SEO,關鍵字研究,WACA/Shopline",
+      "featured": false
+    },
+    {
+      "icon": "🎪",
+      "name": "展覽 × 活動策劃",
+      "desc": "連 3 年主導 TaiSPO，策辦南部首場大力士賽事，募得百萬贊助、現場 500+ 人次。",
+      "tags": "展位規劃,贊助洽談,賽事執行",
+      "featured": false
+    },
+    {
+      "icon": "🤝",
+      "name": "KOL × 異業合作",
+      "desc": "與 57 萬訂閱 YouTuber 啾c 物理治療師合作，帶動體驗預約成長 30% 並打入高雄市場。",
+      "tags": "KOL 開發,異業聯盟,合約初擬",
+      "featured": false
+    },
+    {
+      "icon": "🤖",
+      "name": "AI 工具應用",
+      "desc": "熟用 ChatGPT、Claude、Notion AI，應用於內容創作、A/B 測試標題、專案流程優化。",
+      "tags": "ChatGPT,Claude,NotebookLM",
+      "featured": false
+    }
+  ]
+}

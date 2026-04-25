@@ -1,0 +1,84 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+locale: 'zh_Hant'
+
+collections:
+  - name: "site"
+    label: "網站設定"
+    files:
+      - name: "hero"
+        label: "首頁主視覺"
+        file: "content/hero.json"
+        fields:
+          - { label: "標籤文字", name: "tag", widget: "string", hint: "例：行銷企劃 · Marketing Specialist" }
+          - { label: "姓名（中文）", name: "name_zh", widget: "string" }
+          - { label: "姓名（英文）", name: "name_en", widget: "string" }
+          - { label: "副標題", name: "subtitle", widget: "string" }
+          - { label: "引言", name: "quote", widget: "text" }
+          - label: "成就數字"
+            name: "stats"
+            widget: "list"
+            max: 4
+            fields:
+              - { label: "數字", name: "num", widget: "string" }
+              - { label: "說明", name: "label", widget: "string" }
+
+      - name: "skills"
+        label: "核心能力"
+        file: "content/skills.json"
+        fields:
+          - { label: "區塊副標題", name: "sub", widget: "string" }
+          - label: "技能卡片"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "圖示（emoji）", name: "icon", widget: "string" }
+              - { label: "名稱", name: "name", widget: "string" }
+              - { label: "說明", name: "desc", widget: "text" }
+              - { label: "標籤（逗號分隔）", name: "tags", widget: "string" }
+              - { label: "醒目樣式", name: "featured", widget: "boolean", default: false }
+
+      - name: "experience"
+        label: "工作經歷"
+        file: "content/experience.json"
+        fields:
+          - { label: "副標題", name: "sub", widget: "string" }
+          - label: "經歷項目"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "期間", name: "period", widget: "string", hint: "例：2021 / 04 — 至今" }
+              - { label: "職稱", name: "role", widget: "string" }
+              - { label: "公司", name: "company", widget: "string" }
+              - { label: "亮點（每行一項）", name: "highlights", widget: "list" }
+
+      - name: "projects"
+        label: "代表專案"
+        file: "content/projects.json"
+        fields:
+          - { label: "副標題", name: "sub", widget: "string" }
+          - label: "專案"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "類型標籤", name: "badge", widget: "string" }
+              - { label: "標題", name: "title", widget: "string" }
+              - { label: "描述", name: "desc", widget: "text" }
+              - { label: "成果", name: "result", widget: "string" }
+
+      - name: "contact"
+        label: "聯絡資訊"
+        file: "content/contact.json"
+        fields:
+          - { label: "標題", name: "title", widget: "string" }
+          - { label: "副標題", name: "sub", widget: "string" }
+          - { label: "手機", name: "phone", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "地點", name: "location", widget: "string" }
+          - { label: "可上班日", name: "available", widget: "string" }
+          - { label: "履歷 PDF 連結", name: "resume_url", widget: "string", required: false }

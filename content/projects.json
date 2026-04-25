@@ -1,0 +1,33 @@
+{
+  "sub": "以策略驅動、數據佐證的品牌行銷成果",
+  "items": [
+    {
+      "badge": "活動企劃",
+      "title": "府城純浪盃 ── 大力士賽事",
+      "desc": "南部首場全國性大力士比賽，從企劃提案到現場執行，籌備近半年，整合贊助、行銷、報名系統。",
+      "result": "↑ 社群曝光 32萬+ · 贊助金 100萬+ · 500人到場",
+      "image": "images/project-strongman.png"
+    },
+    {
+      "badge": "數位行銷",
+      "title": "Google Ads + SEO 雙軌優化",
+      "desc": "以 GSC 找高轉換關鍵字、優化廣告圖文與出價策略，同步推進官網 SEO，讓免費流量取代付費廣告。",
+      "result": "↑ ROAS 200+ · TRX 單槓排名 TOP 1 · 加購率 +80%",
+      "image": "images/project-seo.png"
+    },
+    {
+      "badge": "KOL 合作",
+      "title": "啾c 物理治療師 ── 線上線下整合",
+      "desc": "與 57 萬訂閱 YouTuber 合作，以 KOL 門市為品牌體驗點，拍攝 YT 影片並設立高雄體驗店。",
+      "result": "↑ 預約體驗 +30% · 訂單成交率上升",
+      "image": "images/project-kol.png"
+    },
+    {
+      "badge": "電商重建",
+      "title": "品牌電商平台遷移 ── WACA",
+      "desc": "主導從 Shopline 遷移至 WACA，建立後台 SOP，優化購買歷程，作為跨部門溝通窗口。",
+      "result": "↑ 每年節省數十萬抽成 · 訂單轉化率提升",
+      "image": "images/project-ecommerce.png"
+    }
+  ]
+}
