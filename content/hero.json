@@ -2,13 +2,25 @@
   "tag": "行銷企劃 · Marketing Specialist",
   "name_zh": "黃鈺雯",
   "name_en": "Debby",
-  "photo": "images/hero-portrait.png",
+  "photo": "/images/20240608192307-1-1-.jpg",
   "subtitle": "數位行銷 · 文案力 · 品牌策略 · AI 應用",
   "quote": "「品牌如人，如何讓顧客一見鍾情，\n進而建立長久關係？」",
   "stats": [
-    { "num": "96萬+", "label": "IG 短影音\n最高觀看數" },
-    { "num": "ROAS\n200+", "label": "Google 關鍵字\n廣告回報率" },
-    { "num": "100萬+", "label": "大力士賽事\n贊助總價值" },
-    { "num": "9年", "label": "編輯 + 行銷\n完整年資" }
+    {
+      "num": "96萬+",
+      "label": "IG 短影音\n最高觀看數"
+    },
+    {
+      "num": "ROAS\n200+",
+      "label": "Google 關鍵字\n廣告回報率"
+    },
+    {
+      "num": "100萬+",
+      "label": "大力士賽事\n贊助總價值"
+    },
+    {
+      "num": "9年",
+      "label": "編輯 + 行銷\n完整年資"
+    }
   ]
 }
