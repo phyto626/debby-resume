@@ -284,14 +284,16 @@
     .project-card {
       background: #fff; border-radius: 24px; overflow: hidden;
       box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.05);
-      transition: all 0.4s ease; display: flex; flex-direction: column; cursor: pointer; text-decoration: none;
+      transition: transform 0.35s cubic-bezier(.16, 1, .3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+      display: flex; flex-direction: column; cursor: pointer; text-decoration: none;
     }
     .project-card:hover {
-      transform: translateY(-8px); box-shadow: 0 24px 48px rgba(0,0,0,0.08); border-color: rgba(107,124,69,0.2);
+      transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.07); border-color: rgba(107,124,69,0.2);
     }
+    .project-card:focus-visible { outline: 3px solid var(--olive-light); outline-offset: 4px; }
     .project-card-img { position: relative; width: 100%; aspect-ratio: 16/10; overflow: hidden; background: #f1f5f9; }
     .project-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
-    .project-card:hover .project-card-img img { transform: scale(1.05); }
+    .project-card:hover .project-card-img img { transform: scale(1.03); }
     
     /* Performance Badge */
     .project-badge {
@@ -310,6 +312,84 @@
       background: linear-gradient(135deg, rgba(107,124,69,0.1), rgba(107,124,69,0.05)); 
       padding: 1rem 1.25rem; border-radius: 16px; border-left: 3px solid var(--olive);
       display: inline-block; text-align: left;
+    }
+    .project-card-cta { margin-top: 1rem; color: var(--olive); font-size: 0.85rem; font-weight: 600; }
+    .project-card-cta span { display: inline-block; transition: transform 0.25s ease; }
+    .project-card:hover .project-card-cta span { transform: translate(2px, -2px); }
+
+    /* Project case study dialog */
+    .project-dialog {
+      position: fixed;
+      inset: 0;
+      width: min(840px, calc(100vw - 3rem));
+      max-width: none;
+      max-height: min(88vh, 900px);
+      margin: auto;
+      padding: 0;
+      overflow: auto;
+      color: var(--ink);
+      background: #fff;
+      border: 0;
+      border-radius: 24px;
+      box-shadow: 0 28px 80px rgba(0,0,0,0.25);
+    }
+    .project-dialog::backdrop { background: rgba(15,23,42,0.58); backdrop-filter: blur(3px); }
+    .project-dialog-visual {
+      min-height: 170px;
+      max-height: 320px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #eef0eb;
+    }
+    .project-dialog-visual[hidden] { display: none; }
+    .project-dialog-visual img { display: block; width: 100%; max-height: 320px; object-fit: contain; }
+    .project-dialog-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 2;
+      width: 42px;
+      height: 42px;
+      margin: 0;
+      border: 1px solid rgba(15,23,42,0.1);
+      border-radius: 50%;
+      background: rgba(255,255,255,0.95);
+      color: var(--ink);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+    .project-dialog-close:hover { background: #fff; transform: translateY(-1px); }
+    .project-dialog-close:focus-visible { outline: 3px solid var(--olive-light); outline-offset: 3px; }
+    .project-dialog-body { padding: 2rem 2.5rem 2.5rem; }
+    .project-dialog-label { font-size: 0.8rem; font-weight: 600; color: var(--olive); margin-bottom: 0.5rem; }
+    .project-dialog-title { font-family: var(--font-serif); font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.3; margin-bottom: 0.8rem; color: var(--ink); }
+    .project-dialog-desc { color: var(--muted); font-size: 1rem; line-height: 1.7; margin-bottom: 1.25rem; }
+    .project-detail-section { display: grid; grid-template-columns: 145px minmax(0, 1fr); gap: 1rem; padding: 1rem 0; border-top: 1px solid rgba(15,23,42,0.09); }
+    .project-detail-section h3 { font-family: var(--font-sans); font-size: 0.9rem; color: var(--olive-dark); font-weight: 600; }
+    .project-detail-section p,
+    .project-detail-section li { color: var(--muted); font-size: 0.95rem; line-height: 1.7; }
+    .project-detail-section p { white-space: pre-line; }
+    .project-detail-section ul { margin: 0; padding-left: 1.25rem; }
+    .project-detail-section li + li { margin-top: 0.5rem; }
+    .project-dialog-result { padding: 1rem 1.25rem; margin-top: 0.5rem; border-left: 3px solid var(--olive); border-radius: 0 14px 14px 0; background: rgba(107,124,69,0.08); }
+    .project-dialog-result h3 { font-size: 0.9rem; color: var(--olive-dark); margin-bottom: 0.35rem; }
+    .project-dialog-result p { color: var(--ink); font-size: 0.95rem; line-height: 1.65; }
+    .project-dialog-actions { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .project-demo-link { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0.7rem 1.25rem; border-radius: 2rem; background: var(--ink); color: #fff; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: transform 0.2s ease, background 0.2s ease; }
+    .project-demo-link:hover { transform: translateY(-1px); background: var(--olive-dark); }
+    .project-demo-link:focus-visible { outline: 3px solid var(--olive-light); outline-offset: 3px; }
+    @media (max-width: 600px) {
+      .project-dialog { width: calc(100vw - 1rem); max-height: calc(100dvh - 1rem); border-radius: 20px; }
+      .project-dialog-visual { min-height: 125px; max-height: 220px; }
+      .project-dialog-visual img { max-height: 220px; }
+      .project-dialog-body { padding: 1.35rem 1.25rem 1.5rem; }
+      .project-detail-section { grid-template-columns: 1fr; gap: 0.35rem; padding: 0.85rem 0; }
+      .project-dialog-close { top: 0.65rem; right: 0.65rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .project-card, .project-card-img img, .project-card-cta span, .project-demo-link, .project-dialog-close { transition: none; }
+      .project-card:hover, .project-card:hover .project-card-cta span, .project-demo-link:hover, .project-dialog-close:hover { transform: none; }
     }
 
     /* Contact */
@@ -432,6 +512,23 @@
       <div class="project-tabs" role="tablist" aria-label="依公司篩選專案" id="project-tabs"></div>
     </div>
     <div id="project-panels"></div>
+    <dialog class="project-dialog" id="project-dialog" aria-labelledby="project-dialog-title">
+      <button class="project-dialog-close" id="project-dialog-close" type="button" aria-label="關閉專案介紹">×</button>
+      <div class="project-dialog-visual" id="project-dialog-visual" hidden>
+        <img id="project-dialog-image" alt="" />
+      </div>
+      <div class="project-dialog-body">
+        <p class="project-dialog-label" id="project-dialog-label"></p>
+        <h2 class="project-dialog-title" id="project-dialog-title"></h2>
+        <p class="project-dialog-desc" id="project-dialog-desc"></p>
+        <div id="project-dialog-details"></div>
+        <div class="project-dialog-result" id="project-dialog-result">
+          <h3>成果摘要</h3>
+          <p id="project-dialog-result-text"></p>
+        </div>
+        <div class="project-dialog-actions" id="project-dialog-actions"></div>
+      </div>
+    </dialog>
   </div>
 </section>
 
@@ -459,7 +556,7 @@ async function loadJSON(path) {
 }
 
 function esc(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 
 async function init() {
@@ -547,17 +644,117 @@ async function init() {
       panel.className = `project-panel${i === 0 ? ' is-active' : ''}`;
       if (i !== 0) panel.setAttribute('hidden', '');
 
-      panel.innerHTML = tab.items.map(p => `
-        <a href="#" class="project-card" onclick="event.preventDefault();">
+      panel.innerHTML = tab.items.map((p, projectIndex) => `
+        <a href="#projects" class="project-card" aria-haspopup="dialog" aria-label="查看 ${esc(p.title)} 的專案詳情" data-tab-key="${esc(tab.key)}" data-project-index="${projectIndex}">
           ${p.image ? `<div class="project-card-img"><span class="project-badge">${esc(p.badge)}</span><img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy" /></div>` : `<div class="project-card-img" style="background:var(--olive);display:flex;align-items:center;justify-content:center;"><span style="color:#fff;font-family:var(--font-serif);font-size:1.5rem;opacity:0.5;">待補圖片</span></div>`}
           <div class="project-body">
             <h3 class="project-title">${esc(p.title)}</h3>
             <p class="project-desc">${esc(p.desc)}</p>
             <div class="project-result">${esc(p.result)}</div>
+            <span class="project-card-cta">查看案例詳情 <span aria-hidden="true">↗</span></span>
           </div>
         </a>`).join('');
 
       panelsEl.appendChild(panel);
+    });
+
+    // Project case study dialog
+    const projectDialog = document.getElementById('project-dialog');
+    const projectDialogClose = document.getElementById('project-dialog-close');
+    const projectDialogVisual = document.getElementById('project-dialog-visual');
+    const projectDialogImage = document.getElementById('project-dialog-image');
+    const projectDialogDetails = document.getElementById('project-dialog-details');
+    const projectDialogResult = document.getElementById('project-dialog-result');
+    const projectDialogActions = document.getElementById('project-dialog-actions');
+
+    function addProjectDetail(parent, label, value) {
+      if (!value || !String(value).trim()) return;
+      const section = document.createElement('section');
+      section.className = 'project-detail-section';
+      const heading = document.createElement('h3');
+      heading.textContent = label;
+      const copy = document.createElement('p');
+      copy.textContent = value;
+      section.append(heading, copy);
+      parent.appendChild(section);
+    }
+
+    function safeProjectLink(value) {
+      const href = String(value || '').trim();
+      if (!href) return '';
+      try {
+        const url = new URL(href, document.baseURI);
+        return url.protocol === 'http:' || url.protocol === 'https:' ? href : '';
+      } catch {
+        return '';
+      }
+    }
+
+    function showProjectDialog(project, tabLabel) {
+      document.getElementById('project-dialog-label').textContent = `${project.badge || ''}${tabLabel ? ` · ${tabLabel}` : ''}`;
+      document.getElementById('project-dialog-title').textContent = project.title || '';
+      document.getElementById('project-dialog-desc').textContent = project.desc || '';
+
+      if (project.image) {
+        projectDialogImage.src = project.image;
+        projectDialogImage.alt = `${project.title || '專案'}示意畫面`;
+        projectDialogVisual.hidden = false;
+      } else {
+        projectDialogImage.removeAttribute('src');
+        projectDialogImage.alt = '';
+        projectDialogVisual.hidden = true;
+      }
+
+      projectDialogDetails.replaceChildren();
+      const details = project.details || {};
+      addProjectDetail(projectDialogDetails, '背景／挑戰', details.background);
+      addProjectDetail(projectDialogDetails, '我的角色', details.role);
+      addProjectDetail(projectDialogDetails, '策略與執行', details.approach);
+      if (Array.isArray(details.outcomes) && details.outcomes.some(item => String(item).trim())) {
+        const section = document.createElement('section');
+        section.className = 'project-detail-section';
+        const heading = document.createElement('h3');
+        heading.textContent = '成果補充';
+        const list = document.createElement('ul');
+        details.outcomes.filter(item => String(item).trim()).forEach(item => {
+          const row = document.createElement('li');
+          row.textContent = item;
+          list.appendChild(row);
+        });
+        section.append(heading, list);
+        projectDialogDetails.appendChild(section);
+      }
+
+      const resultText = document.getElementById('project-dialog-result-text');
+      resultText.textContent = project.result || '';
+      projectDialogResult.hidden = !project.result;
+
+      projectDialogActions.replaceChildren();
+      const demoUrl = safeProjectLink(project.demo_url);
+      if (demoUrl) {
+        const link = document.createElement('a');
+        link.className = 'project-demo-link';
+        link.href = demoUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = '查看互動 Demo ↗';
+        projectDialogActions.appendChild(link);
+      }
+      projectDialog.showModal();
+    }
+
+    panelsEl.addEventListener('click', e => {
+      const trigger = e.target.closest('.project-card');
+      if (!trigger) return;
+      e.preventDefault();
+      const tab = projects.tabs.find(item => item.key === trigger.dataset.tabKey);
+      const project = tab && tab.items[Number(trigger.dataset.projectIndex)];
+      if (project) showProjectDialog(project, tab.label);
+    });
+
+    projectDialogClose.addEventListener('click', () => projectDialog.close());
+    projectDialog.addEventListener('click', e => {
+      if (e.target === projectDialog) projectDialog.close();
     });
 
     // Tab switching logic

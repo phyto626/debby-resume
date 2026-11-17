@@ -78,6 +78,20 @@ collections:
                   - { label: "描述", name: "desc", widget: "text" }
                   - { label: "成果", name: "result", widget: "string" }
                   - { label: "專案圖片", name: "image", widget: "image", required: false }
+                  - { label: "Demo 連結", name: "demo_url", widget: "string", required: false }
+                  - label: "案例詳情"
+                    name: "details"
+                    widget: "object"
+                    required: false
+                    fields:
+                      - { label: "背景／挑戰", name: "background", widget: "text", required: false }
+                      - { label: "我的角色", name: "role", widget: "text", required: false }
+                      - { label: "策略與執行", name: "approach", widget: "text", required: false }
+                      - label: "成果補充"
+                        name: "outcomes"
+                        widget: "list"
+                        required: false
+                        field: { label: "成果項目", name: "outcome", widget: "text" }
 
       - name: "contact"
         label: "聯絡資訊"
