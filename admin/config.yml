@@ -63,15 +63,21 @@ collections:
         file: "content/projects.json"
         fields:
           - { label: "副標題", name: "sub", widget: "string" }
-          - label: "專案"
-            name: "items"
+          - label: "公司／專案分類"
+            name: "tabs"
             widget: "list"
             fields:
-              - { label: "類型標籤", name: "badge", widget: "string" }
-              - { label: "標題", name: "title", widget: "string" }
-              - { label: "描述", name: "desc", widget: "text" }
-              - { label: "成果", name: "result", widget: "string" }
-              - { label: "專案圖片", name: "image", widget: "image", required: false }
+              - { label: "分類識別碼", name: "key", widget: "string", hint: "英文小寫，例如 kawasteel；請勿與其他分類重複。" }
+              - { label: "前台分類名稱", name: "label", widget: "string" }
+              - label: "專案"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "類型標籤", name: "badge", widget: "string" }
+                  - { label: "標題", name: "title", widget: "string" }
+                  - { label: "描述", name: "desc", widget: "text" }
+                  - { label: "成果", name: "result", widget: "string" }
+                  - { label: "專案圖片", name: "image", widget: "image", required: false }
 
       - name: "contact"
         label: "聯絡資訊"
