@@ -229,7 +229,55 @@
       content: '✦'; position: absolute; left: 0; top: 0; font-size: 0.8rem; color: var(--accent);
     }
 
-    /* Projects */
+    /* Projects — Tab switcher */
+    .project-tabs {
+      display: inline-flex;
+      gap: 4px;
+      padding: 4px;
+      border-radius: 2rem;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      margin-bottom: 2.5rem;
+    }
+    .project-tab {
+      appearance: none;
+      padding: 0.55rem 1.5rem;
+      border-radius: 2rem;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(.16, 1, .3, 1);
+    }
+    .project-tab:hover {
+      color: var(--ink);
+      background: rgba(0, 0, 0, 0.03);
+    }
+    .project-tab[aria-selected="true"] {
+      background: var(--ink);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Projects — Tab panel animation */
+    .project-panel {
+      display: none;
+      animation: panelIn 0.4s cubic-bezier(.16, 1, .3, 1) both;
+    }
+    .project-panel.is-active {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 2.5rem;
+    }
+    @keyframes panelIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Projects — Card (unchanged) */
     .projects-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 2.5rem;
     }
@@ -302,6 +350,7 @@
       .nav-links { display: none; }
       .container { padding: 0 1.5rem; }
       .projects-grid { grid-template-columns: 1fr; }
+      .project-panel.is-active { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -379,7 +428,10 @@
       <h2 class="section-title">代表專案</h2>
       <p class="section-sub" id="projects-sub"></p>
     </div>
-    <div class="projects-grid" id="projects-grid"></div>
+    <div style="text-align:center;">
+      <div class="project-tabs" role="tablist" aria-label="依公司篩選專案" id="project-tabs"></div>
+    </div>
+    <div id="project-panels"></div>
   </div>
 </section>
 
@@ -467,17 +519,86 @@ async function init() {
         </ul>
       </div>`).join('');
 
-    // PROJECTS
+    // PROJECTS — Tab-based rendering
     document.getElementById('projects-sub').textContent = projects.sub;
-    document.getElementById('projects-grid').innerHTML = projects.items.map(p => `
-      <a href="#" class="project-card" onclick="event.preventDefault();">
-        ${p.image ? `<div class="project-card-img"><span class="project-badge">${esc(p.badge)}</span><img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy" /></div>` : ''}
-        <div class="project-body">
-          <h3 class="project-title">${esc(p.title)}</h3>
-          <p class="project-desc">${esc(p.desc)}</p>
-          <div class="project-result">${esc(p.result)}</div>
-        </div>
-      </a>`).join('');
+
+    const tabsEl = document.getElementById('project-tabs');
+    const panelsEl = document.getElementById('project-panels');
+
+    // Build tabs and panels
+    projects.tabs.forEach((tab, i) => {
+      // Tab button
+      const btn = document.createElement('button');
+      btn.className = 'project-tab';
+      btn.type = 'button';
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      btn.setAttribute('aria-controls', `panel-${tab.key}`);
+      btn.id = `tab-${tab.key}`;
+      btn.textContent = tab.label;
+      if (i !== 0) btn.setAttribute('tabindex', '-1');
+      tabsEl.appendChild(btn);
+
+      // Panel
+      const panel = document.createElement('div');
+      panel.id = `panel-${tab.key}`;
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', `tab-${tab.key}`);
+      panel.className = `project-panel${i === 0 ? ' is-active' : ''}`;
+      if (i !== 0) panel.setAttribute('hidden', '');
+
+      panel.innerHTML = tab.items.map(p => `
+        <a href="#" class="project-card" onclick="event.preventDefault();">
+          ${p.image ? `<div class="project-card-img"><span class="project-badge">${esc(p.badge)}</span><img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy" /></div>` : `<div class="project-card-img" style="background:var(--olive);display:flex;align-items:center;justify-content:center;"><span style="color:#fff;font-family:var(--font-serif);font-size:1.5rem;opacity:0.5;">待補圖片</span></div>`}
+          <div class="project-body">
+            <h3 class="project-title">${esc(p.title)}</h3>
+            <p class="project-desc">${esc(p.desc)}</p>
+            <div class="project-result">${esc(p.result)}</div>
+          </div>
+        </a>`).join('');
+
+      panelsEl.appendChild(panel);
+    });
+
+    // Tab switching logic
+    tabsEl.addEventListener('click', e => {
+      const btn = e.target.closest('.project-tab');
+      if (!btn) return;
+      // Deselect all tabs
+      tabsEl.querySelectorAll('.project-tab').forEach(t => {
+        t.setAttribute('aria-selected', 'false');
+        t.setAttribute('tabindex', '-1');
+      });
+      // Hide all panels
+      panelsEl.querySelectorAll('.project-panel').forEach(p => {
+        p.classList.remove('is-active');
+        p.setAttribute('hidden', '');
+      });
+      // Activate clicked tab
+      btn.setAttribute('aria-selected', 'true');
+      btn.removeAttribute('tabindex');
+      const panel = document.getElementById(btn.getAttribute('aria-controls'));
+      panel.removeAttribute('hidden');
+      // Force re-trigger animation
+      panel.classList.remove('is-active');
+      void panel.offsetWidth;
+      panel.classList.add('is-active');
+    });
+
+    // Keyboard navigation for tabs
+    tabsEl.addEventListener('keydown', e => {
+      const tabs = [...tabsEl.querySelectorAll('.project-tab')];
+      const cur = tabs.indexOf(document.activeElement);
+      if (cur < 0) return;
+      let next = -1;
+      if (e.key === 'ArrowRight') next = (cur + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft') next = (cur - 1 + tabs.length) % tabs.length;
+      if (next >= 0) {
+        e.preventDefault();
+        tabs[next].focus();
+        tabs[next].click();
+      }
+    });
 
     // CONTACT
     document.getElementById('contact-title').textContent = contact.title;
