@@ -77,7 +77,13 @@ collections:
                   - { label: "標題", name: "title", widget: "string" }
                   - { label: "描述", name: "desc", widget: "text" }
                   - { label: "成果", name: "result", widget: "string" }
-                  - { label: "專案圖片", name: "image", widget: "image", required: false }
+                  - { label: "專案圖片（封面）", name: "image", widget: "image", required: false, hint: "卡片封面用，只需一張" }
+                  - label: "輪播圖片（dialog 展示）"
+                    name: "images"
+                    widget: "list"
+                    required: false
+                    hint: "可上傳多張，於 dialog 以輪播方式展示"
+                    field: { label: "圖片", name: "src", widget: "image" }
                   - { label: "Demo 連結", name: "demo_url", widget: "string", required: false }
                   - label: "案例詳情"
                     name: "details"
