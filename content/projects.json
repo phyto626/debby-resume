@@ -52,7 +52,7 @@
           "images": [
             "images/project-ai-social-analytics.jpg"
           ],
-          "demo_url": "https://social-report-ecoco.onrender.com/",
+          "demo_url": "https://social-report-fpg.vercel.app/",
           "details": {
             "background": "每月手動匯出、整理與排版社群報表，耗時且指標口徑不一致。",
             "role": "定義觸及與互動等指標口徑，規劃七個報告區塊與章節順序，並抽查 AI 洞察是否符合貼文實際表現。",
